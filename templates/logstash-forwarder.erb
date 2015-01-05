@@ -1,0 +1,15 @@
+{
+  "network": {
+    "servers": [ "<%= @logstash_server %>:<%= @logstash_port %>" ],
+     "timeout": 15,
+     "ssl ca": "/etc/pki/tls/certs/logstash-forwarder.crt"
+     },
+     "files": [
+       {
+       "paths": [
+       <%= @check_files.map { |file| "\"#{file}\"" }.join(',')-%>
+             ],
+         "fields": { "type": "syslog" }
+       }
+       ]
+}
